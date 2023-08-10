@@ -6,6 +6,7 @@ common_tags = {
 }
 
 ###CloudWatch alerts###
+metric_namespace = "CloudWatchAlarms"
+cloudtrail_loggroup_name = "axleinfo-int-cloudtrail-logs-853931821519-a7aa581f"
 cloudwatchalerts_sns_topic_name = "aws-trainee-cloudwatchalerts-notifcations"
 cloudwatchalerts_sqs_name = "aws-trainee-cloudwatchalerts-queue"
-
