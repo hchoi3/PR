@@ -50,3 +50,15 @@ locals {
     "RootAccountUsage" = "{$.userIdentity.type=\"Root\" && $.userIdentity.invokedBy NOT EXISTS && $.eventType !=\"AwsServiceEvent\"}"
   }
 }
+
+###VPC_flow_logs####
+
+variable "flowlogrole_name" {
+  type    = string
+  default = ""
+}
+
+variable "flowlogrole_policy_name" {
+  type    = string
+  default = ""
+}
