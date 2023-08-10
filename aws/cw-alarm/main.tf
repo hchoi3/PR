@@ -1,24 +1,24 @@
 ###CloudWatchAlerts###
 
-module "cloudwatch_alarms" {
-  source ="../../terraform-modules/aws/cloudwatch/metric-alarm"
-  for_each = local.CloudTrailMetrics
-  alarm_name = "${each.key}"
-  metric_name = "${each.key}"
-  namespace = var.metric_namespace
-  alarm_actions = [module.sns_cloudwatchalerts_notifications.sns_topic_arn]
-  tags = var.common_tags
-}
+# module "cloudwatch_alarms" {
+#   source ="../../terraform-modules/aws/cloudwatch/metric-alarm"
+#   for_each = local.CloudTrailMetrics
+#   alarm_name = "${each.key}"
+#   metric_name = "${each.key}"
+#   namespace = var.metric_namespace
+#   alarm_actions = [module.sns_cloudwatchalerts_notifications.sns_topic_arn]
+#   tags = var.common_tags
+# }
 
-module "cloudwatch_log_metric_filter" {
-  source ="../../terraform-modules/aws/cloudwatch/metric-filter"
-  for_each = local.CloudTrailMetrics
-  log_group_name = var.cloudtrail_loggroup_name
-  name = "${each.key}"
-  metric_transformation_name = "${each.key}"
-  pattern = "${each.value}"
-  metric_transformation_namespace = var.metric_namespace
-}
+# module "cloudwatch_log_metric_filter" {
+#   source ="../../terraform-modules/aws/cloudwatch/metric-filter"
+#   for_each = local.CloudTrailMetrics
+#   log_group_name = var.cloudtrail_loggroup_name
+#   name = "${each.key}"
+#   metric_transformation_name = "${each.key}"
+#   pattern = "${each.value}"
+#   metric_transformation_namespace = var.metric_namespace
+# }
 
 module "vpc_flowlogs_cloudwatch_alarms" {
   source ="../../terraform-modules/aws/cloudwatch/metric-alarm"
@@ -63,4 +63,23 @@ module "cwa_sns_topic_subscription"{
 }
 
 
+##VPC_flow_log###
+
+module "flowlogrole" {
+  source = "../../terraform-modules/aws/iam/iam_role"
+  iam_role_name = var.flowlogrole_name
+  iam_role_assume_role_policy = data.aws_iam_policy_document.vpc_flow_assume_role_policy.json
+  iam_role_policy_name = var.flowlogrole_policy_name
+  iam_role_policy = data.aws_iam_policy_document.flow_log_role_policy.json
+}
+
+module "vpc_flowlog" {
+  source = "../../terraform-modules/aws/platform-services/vpc_flowlog"
+  for_each = toset(data.aws_vpcs.current.ids)
+  vpc_id = "${each.key}"
+  flow_log_role_arn = module.flowlogrole.iam_role_arn
+  environment = var.common_tags["environment"]
+  cloudwatch_log_tags = var.common_tags
+  vpc_flow_log_tags = var.common_tags
+}
 

@@ -1,11 +1,6 @@
 data "aws_region" "current" {}
 data "aws_caller_identity" "current" {}
 data "aws_vpcs" "current" {}
-# locals {
-#   vpc_ids_map = {
-#     for idx, vpc_id in data.aws_vpcs.current.ids : var.vpc_name[idx] => vpc_id
-#   }
-# }
 
 ###CWA Policies###
 
@@ -108,36 +103,5 @@ data "aws_iam_policy_document" "flow_log_role_policy" {
     ]
     
     resources = ["arn:aws:logs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:log-group:*"]
-  }
-}
-
-###Security_Group_ABAC_Policy###
-
-data "aws_iam_policy_document" "sg_abac_policy" {
-  version = "2012-10-17"
-  statement {
-    sid = ""
-    effect = "Allow"
-
-    actions = [
-      "ec2:DescribeSecurityGroupRules",
-			"ec2:DescribeSecurityGroups"
-    ]
- 
-    resources = "*"
-    condition {
-      test = "StringEquals"
-      variable = "aws:PrincipalTag/Access-team"
-
-      values = [var.common_tags["Access-team"]
-      ]
-    }
-    condition {
-      test = "StringEquals"
-      variable = "ec2:ResourceTag/environment"
-
-      values = [var.common_tags["environment"]
-      ]
-    }
   }
 }
