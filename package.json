@@ -1,0 +1,32 @@
+{
+    "name": "hchoi",
+    "version": "1.0.0",
+    "description": "",
+    "main": "math.js",
+    "scripts": {
+      "test": "jest"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+      "jest": "^29.5.0",
+      "jest-junit": "^15.0.0"
+    },
+    "jest": {
+      "reporters": [
+        "default",
+        "jest-junit"
+      ]
+    },
+    "jest-junit": {
+      "suiteName": "jest tests",
+      "outputDirectory": "reports",
+      "outputName": "jest-junit.xml",
+      "uniqueOutputName": "false",
+      "classNameTemplate": "{classname}-{title}",
+      "titleTemplate": "{classname}-{title}",
+      "ancestorSeparator": " › ",
+      "usePathForSuiteName": "true"
+    }
+  }
