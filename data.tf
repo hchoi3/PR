@@ -40,8 +40,6 @@ resource "azurerm_linux_virtual_machine" "linux_virtual_machine" {
     }
   }
 
-  admin_password = var.linux_virtual_machine-admin_password
-
   dynamic "admin_ssh_key" {
     for_each = var.linux_virtual_machine-admin_ssh_key
 
