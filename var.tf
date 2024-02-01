@@ -201,3 +201,13 @@ variable "linux_virtual_machine-zone" {
   type = string
   default = null
 }
+
+variable "AWS_REGION" {
+  type = string 
+  default = "us-east"
+}
+
+variable "IAM_role_arn" {
+  type = string
+  default = null
+}
