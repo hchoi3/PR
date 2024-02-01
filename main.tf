@@ -129,3 +129,5 @@ resource "azurerm_linux_virtual_machine" "linux_virtual_machine" {
   virtual_machine_scale_set_id = var.linux_virtual_machine-virtual_machine_scale_set_id
   zone = var.linux_virtual_machine-zone
 }
+
+#commit
