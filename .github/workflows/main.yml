@@ -16,11 +16,11 @@ jobs:
         run: npm install -g snyk
 
       - name: Run Snyk IaC test
-        run: snyk iac test --all-projects
+        run: snyk iac test 
 
       - name: Check Snyk IaC test results
         run: |
-          snyk iac test --json --all-projects > snyk_iac_results.json
+          snyk iac test --json > snyk_iac_results.json
           test_result=$(jq '.ok' snyk_iac_results.json)
           if [ "$test_result" = true ]; then
             echo "Snyk IaC test passed"

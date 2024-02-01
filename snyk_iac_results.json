@@ -1,0 +1,158 @@
+[
+  {
+    "meta": {
+      "isPrivate": true,
+      "isLicensesEnabled": false,
+      "ignoreSettings": {
+        "adminOnly": false,
+        "reasonRequired": false,
+        "disregardFilesystemIgnores": false
+      },
+      "org": "hchoi3",
+      "orgPublicId": "2ecba064-434b-4170-b3e7-f0b0d39a2648",
+      "policy": ""
+    },
+    "filesystemPolicy": false,
+    "vulnerabilities": [],
+    "dependencyCount": 0,
+    "licensesPolicy": null,
+    "ignoreSettings": null,
+    "targetFile": "main.tf",
+    "projectName": "PR",
+    "org": "hchoi3",
+    "policy": "",
+    "isPrivate": true,
+    "targetFilePath": "/Users/choih10/Downloads/PR/main.tf",
+    "packageManager": "terraformconfig",
+    "path": "/Users/choih10/Downloads/PR",
+    "projectType": "terraformconfig",
+    "ok": false,
+    "infrastructureAsCodeIssues": [
+      {
+        "id": "SNYK-CC-TF-263",
+        "title": "Virtual machine is configured with password authentication for admin",
+        "severity": "high",
+        "isIgnored": false,
+        "subType": "Compute",
+        "documentation": "https://security.snyk.io/rules/cloud/SNYK-CC-TF-263",
+        "isGeneratedByCustomRule": false,
+        "issue": "Administrative password has been set in configuration file",
+        "impact": "The secret value will be readable to anyone with access to VCS, which can lead to unauthorized data disclosure or privilege escalation",
+        "resolve": "Set `admin_ssh_key` attribute instead of password authentication",
+        "remediation": {
+          "terraform": "Set `admin_ssh_key` attribute instead of password authentication",
+          "arm": "Set `properties.osProfile.linuxConfiguration.ssh` attribute instead of password authentication"
+        },
+        "lineNumber": 43,
+        "iacDescription": {
+          "issue": "Administrative password has been set in configuration file",
+          "impact": "The secret value will be readable to anyone with access to VCS, which can lead to unauthorized data disclosure or privilege escalation",
+          "resolve": "Set `admin_ssh_key` attribute instead of password authentication"
+        },
+        "publicId": "SNYK-CC-TF-263",
+        "msg": "resource.azurerm_linux_virtual_machine[linux_virtual_machine].admin_password",
+        "references": [
+          "https://docs.microsoft.com/en-us/azure/virtual-machines/linux/mac-create-ssh-keys"
+        ],
+        "path": [
+          "resource",
+          "azurerm_linux_virtual_machine[linux_virtual_machine]",
+          "admin_password"
+        ],
+        "compliance": []
+      }
+    ]
+  },
+  {
+    "meta": {
+      "isPrivate": true,
+      "isLicensesEnabled": false,
+      "ignoreSettings": {
+        "adminOnly": false,
+        "reasonRequired": false,
+        "disregardFilesystemIgnores": false
+      },
+      "org": "hchoi3",
+      "orgPublicId": "2ecba064-434b-4170-b3e7-f0b0d39a2648",
+      "policy": ""
+    },
+    "filesystemPolicy": false,
+    "vulnerabilities": [],
+    "dependencyCount": 0,
+    "licensesPolicy": null,
+    "ignoreSettings": null,
+    "targetFile": "provider.tf",
+    "projectName": "PR",
+    "org": "hchoi3",
+    "policy": "",
+    "isPrivate": true,
+    "targetFilePath": "/Users/choih10/Downloads/PR/provider.tf",
+    "packageManager": "terraformconfig",
+    "path": "/Users/choih10/Downloads/PR",
+    "projectType": "terraformconfig",
+    "ok": false,
+    "infrastructureAsCodeIssues": [
+      {
+        "id": "SNYK-CC-TF-74",
+        "title": "Credentials are configured via provider attributes",
+        "severity": "high",
+        "isIgnored": false,
+        "subType": "Provider",
+        "documentation": "https://security.snyk.io/rules/cloud/SNYK-CC-TF-74",
+        "isGeneratedByCustomRule": false,
+        "issue": "Credentials are configured via provider attributes",
+        "impact": "Use of provider attributes can lead to accidental disclosure of credentials in configuration files, variable definition files, event logs or console logs",
+        "resolve": "Set access credentials via environment variables, and remove `access_key` and `secret_key` attributes from the configuration",
+        "remediation": {
+          "terraform": "Set access credentials via environment variables, and remove `access_key` and `secret_key` attributes from the configuration"
+        },
+        "lineNumber": -1,
+        "iacDescription": {
+          "issue": "Credentials are configured via provider attributes",
+          "impact": "Use of provider attributes can lead to accidental disclosure of credentials in configuration files, variable definition files, event logs or console logs",
+          "resolve": "Set access credentials via environment variables, and remove `access_key` and `secret_key` attributes from the configuration"
+        },
+        "publicId": "SNYK-CC-TF-74",
+        "msg": "provider[aws][0]",
+        "references": [
+          "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html",
+          "https://registry.terraform.io/providers/hashicorp/aws/latest/docs"
+        ],
+        "path": [
+          "provider[aws][0]"
+        ],
+        "compliance": []
+      }
+    ]
+  },
+  {
+    "meta": {
+      "isPrivate": true,
+      "isLicensesEnabled": false,
+      "ignoreSettings": {
+        "adminOnly": false,
+        "reasonRequired": false,
+        "disregardFilesystemIgnores": false
+      },
+      "org": "hchoi3",
+      "orgPublicId": "2ecba064-434b-4170-b3e7-f0b0d39a2648",
+      "policy": ""
+    },
+    "filesystemPolicy": false,
+    "vulnerabilities": [],
+    "dependencyCount": 0,
+    "licensesPolicy": null,
+    "ignoreSettings": null,
+    "targetFile": "var.tf",
+    "projectName": "PR",
+    "org": "hchoi3",
+    "policy": "",
+    "isPrivate": true,
+    "targetFilePath": "/Users/choih10/Downloads/PR/var.tf",
+    "packageManager": "terraformconfig",
+    "path": "/Users/choih10/Downloads/PR",
+    "projectType": "terraformconfig",
+    "ok": true,
+    "infrastructureAsCodeIssues": []
+  }
+]
