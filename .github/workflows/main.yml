@@ -37,5 +37,5 @@ jobs:
 
       - name: Determine changed files
         run: |
-          git diff --name-only origin/${{ github.base_ref }} ${{ github.head_ref }} > changed_files.txt
+          git diff --name-only (HEAD detached at pull/14/merge) > changed_files.txt
           echo $(cat changed_files.txt)
