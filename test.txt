@@ -1,1 +1,2 @@
 should only scan this txt file in snyk scan.
+new
