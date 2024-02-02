@@ -28,9 +28,10 @@ jobs:
       #     name: snyk_iac_results
       #     path: snyk_iac_results.json
 
-      - name: Run Snyk IaC test
-        run: echo $GITHUB_WORKSPACE/${{ env.CHANGED_FILES }}
-        #run: snyk iac test ${GITHUB_WORKSPACE}/${{ env.CHANGED_FILES }}
+      # - name: Run Snyk IaC test
+      #   run: snyk iac test ${GITHUB_WORKSPACE}/${{ env.CHANGED_FILES }}
 
-      - name: list
-        run: ls $GITHUB_WORKSPACE/${{ env.CHANGED_FILES }}
+      - name: Determine changed files
+        run: |
+          git diff --name-only ${{ github.base_ref }} ${{ github.head_ref }} > changed_files.txt
+          cat changed_files.txt
