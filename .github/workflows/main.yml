@@ -33,7 +33,7 @@ jobs:
       - name: Set default branch
         run: |
           git branch > branch.txt
-          echo branch.txt
+          cat branch.txt
 
       - name: Determine changed files
         run: |
