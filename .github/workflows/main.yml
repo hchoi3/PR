@@ -31,10 +31,7 @@ jobs:
       # - name: Run Snyk IaC test
       #   run: snyk iac test ${GITHUB_WORKSPACE}/${{ env.CHANGED_FILES }}
       - name: Set default branch
-        run: git remote set-branches origin ${{ github.base_ref }}
-
-      - name: Fetch changes
-        run: git fetch origin ${{ github.base_ref }}
+        run: git branch
 
       - name: Determine changed files
         run: |
