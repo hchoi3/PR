@@ -19,7 +19,7 @@ jobs:
         run: snyk auth ${{ secrets.SNYK_TOKEN }}
       
       - name: Generate JSON of Snyk report
-        run: snyk iac test --json > snyk_iac_results.json
+        run: snyk iac test --json-file-output=snyk_iac_results.json
       
       - name: Upload Snyk IaC JSON report
         uses: actions/upload-artifact@v2
