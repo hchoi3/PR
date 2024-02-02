@@ -29,4 +29,5 @@ jobs:
       #     path: snyk_iac_results.json
 
       - name: Run Snyk IaC test
-        run: snyk iac test ${GITHUB_WORKSPACE}/${{ env.CHANGED_FILES }}
+        run: print(${GITHUB_WORKSPACE}/${{ env.CHANGED_FILES }})
+        #run: snyk iac test ${GITHUB_WORKSPACE}/${{ env.CHANGED_FILES }}
