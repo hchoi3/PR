@@ -12,11 +12,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install Snyk CLI
-        run: npm install -g snyk
+      # - name: Install Snyk CLI
+      #   run: npm install -g snyk
       
-      - name: Authenticate Snyk CLI
-        run: snyk auth ${{ secrets.SNYK_TOKEN }}
+      # - name: Authenticate Snyk CLI
+      #   run: snyk auth ${{ secrets.SNYK_TOKEN }}
       
       # - name: Generate JSON of Snyk report
       #   run: snyk iac test --json-file-output=snyk_iac_results.json
@@ -31,3 +31,6 @@ jobs:
       - name: Run Snyk IaC test
         run: echo $GITHUB_WORKSPACE/${{ env.CHANGED_FILES }}
         #run: snyk iac test ${GITHUB_WORKSPACE}/${{ env.CHANGED_FILES }}
+
+      - name: list
+        run: ls $GITHUB_WORKSPACE/${{ env.CHANGED_FILES }}
