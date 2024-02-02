@@ -29,4 +29,4 @@ jobs:
           path: snyk_iac_results.json
 
       - name: Run Snyk IaC test
-        run: snyk iac test
+        run: snyk iac test --paths=${GITHUB_WORKSPACE}/${{ env.CHANGED_FILES }}
