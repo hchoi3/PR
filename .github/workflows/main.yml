@@ -31,7 +31,7 @@ jobs:
       # - name: Run Snyk IaC test
       #   run: snyk iac test ${GITHUB_WORKSPACE}/${{ env.CHANGED_FILES }}
       - name: Set default branch
-        run: git branch
+        run: echo $(git branch)
 
       - name: Determine changed files
         run: |
