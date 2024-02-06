@@ -1,32 +1,38 @@
-name: Snyk IaC Test
+name: Snyk Security
 
 on:
   pull_request:
-    branches:
-      - main
+    branches: ["main"]
+
+permissions:
+  contents: read
 
 jobs:
-  snyk_iac_test:
+  snyk:
+    permissions:
+      contents: read # for actions/checkout to fetch code
+      security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
+      actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - name: Set up Snyk CLI to check for security issues
+        # Snyk can be used to break the build when it detects security issues.
+        uses: snyk/actions/setup@806182742461562b67788a64410098c9d9b96adb
+        env:
+          # This is where you will need to introduce the Snyk API token created with your Snyk account
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
-      - name: Install Snyk CLI
-        run: npm install -g snyk
-      
-      - name: Authenticate Snyk CLI
-        run: snyk auth ${{ secrets.SNYK_TOKEN }}
-      
-      - name: Generate JSON of Snyk report
-        run: snyk iac test --json-file-output=snyk_iac_results.json
-        continue-on-error: true
-      
-      - name: Upload Snyk IaC JSON report
-        uses: actions/upload-artifact@v2
+        # Runs Snyk Infrastructure as Code (IaC) analysis and uploads result to Snyk.
+        # Use || true to not fail the pipeline.
+      - name: Snyk IaC test and report
+        run: snyk iac test --sarif-file-output=snyk-code.sarif || true
+        env:
+          # This is where you will need to introduce the Snyk API token created with your Snyk account
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+        # Push the Snyk Code results into GitHub Code Scanning tab
+      - name: Upload result to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v2
         with:
-          name: snyk_iac_results
-          path: snyk_iac_results.json
-
-      - name: Run Snyk IaC test
-        run: snyk iac test
+          sarif_file: snyk-code.sarif
