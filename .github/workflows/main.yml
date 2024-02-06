@@ -29,4 +29,7 @@ jobs:
       #     path: snyk_iac_results.json
 
       - name: Run Snyk IaC test
-        run: snyk iac test --severity-threshold=critical,high
+        run: |
+          snyk iac test --severity-threshold=critical
+          snyk iac test --severity-threshold=high
+
