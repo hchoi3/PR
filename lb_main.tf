@@ -1,7 +1,8 @@
-resource "aws_iam_access_key" "example" {
-  user = "example-user"
-}
+resource "aws_s3_bucket" "example_bucket" {
+  bucket = "example-bucket-name"  # Change this to your desired bucket name
+  acl    = "public"
 
-output "access_key_secret" {
-  value = aws_iam_access_key.example.secret
+  tags = {
+    Name = "ExampleBucket"
+  }
 }
