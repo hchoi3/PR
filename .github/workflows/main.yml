@@ -25,7 +25,7 @@ jobs:
 
         # Runs Snyk Infrastructure as Code (IaC) analysis and uploads result to Snyk.
         # Use || true to not fail the pipeline.
-      - name: Snyk IaC test and report
+      - name: Snyk IaC report
         run: snyk iac test --sarif-file-output=snyk-code.sarif || true
         env:
           # This is where you will need to introduce the Snyk API token created with your Snyk account
@@ -33,8 +33,17 @@ jobs:
 
         # Push the Snyk Code results into GitHub Code Scanning tab
       - name: Upload result to GitHub Code Scanning
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: snyk-code.sarif
+      
+        # Runs Snyk Infrastructure as Code (IaC) Test for Critical and Highs
+      - name: Snyk IaC test 
+        run: |
+          snyk iac test --severity-threshold=critical
+          snyk iac test --severity-threshold=high
+        env:
+          # This is where you will need to introduce the Snyk API token created with your Snyk account
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
       
