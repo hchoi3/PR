@@ -12,4 +12,3 @@ provider "aws" {
     role_arn    = var.IAM_role_arn
   }
 }
-#make change
