@@ -3,7 +3,7 @@ name: Snyk IaC Test
 on:
   pull_request:
     branches:
-      - mains
+      - main
 
 jobs:
   snyk_iac_test:
