@@ -40,9 +40,9 @@ jobs:
         run: |
           snyk iac test --severity-threshold=critical
           snyk iac test --severity-threshold=high
-        # env:
-        #   # This is where you will need to introduce the Snyk API token created with your Snyk account
-        #   SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        env:
+          # This is where you will need to introduce the Snyk API token created with your Snyk account
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
       #In summary, using snyk/actions/setup is a more comprehensive approach as it not only handles authentication but also ensures that the Snyk CLI environment is correctly set up for use within GitHub Actions workflows. It provides a standardized way to incorporate Snyk into CI/CD pipelines, abstracting away setup complexities and ensuring consistency across workflows. On the other hand, directly running snyk auth might be suitable for simpler scenarios or when you need more control over the authentication process.
 
